@@ -85,4 +85,9 @@ export class DbService {
   async deleteItem(id: string): Promise<void> {
     await this.run("DELETE FROM items WHERE id = ?", [id])
   }
+
+  async getItemById(id: string): Promise<Item | undefined> {
+    const item = await this.get("SELECT * FROM items WHERE id = ?", [id])
+    return item as Item | undefined
+  }
 }
