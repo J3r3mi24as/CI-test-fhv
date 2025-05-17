@@ -22,6 +22,7 @@ module.exports = defineConfig([{
         sourceType: "module",
         parserOptions: {},
     },
+    ignores: ["node_modules", "dist", "build", "jest.config.js", "eslint.config.js"],
     files: ["**/*.ts", "**/*.tsx"],
 
     extends: compat.extends("plugin:@typescript-eslint/recommended"),
