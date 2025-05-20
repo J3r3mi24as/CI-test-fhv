@@ -4,6 +4,7 @@
   "description": "A demo application for CI/CD using TypeScript, Node.js, and SQLite.",
   "main": "src/app.ts",
   "scripts": {
+    "prebuild": "mkdir -p database && touch database/database.db",
     "start": "node dist/app.js",
     "build": "tsc",
     "test": "jest",
@@ -28,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/ci-cd-demo.git"
+    "url": "https://github.com/J3r3mi24as/ci-cd-demo.git"
   },
   "keywords": [
     "ci",
