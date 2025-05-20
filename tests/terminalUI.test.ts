@@ -2,6 +2,8 @@ import { TerminalUI } from '../src/ui/terminalUI';
 import { DbService } from '../src/services/dbService';
 import readline from 'readline';
 
+type Function = (s1: string) => void
+
 // Mock readline
 jest.mock('readline', () => ({
   createInterface: jest.fn().mockReturnValue({
@@ -63,7 +65,8 @@ describe('TerminalUI Tests', () => {
     mockDbService.getAllItems.mockResolvedValueOnce(mockItems);
     
     // Simulate selecting option 1 from the main menu
-    mockReadline.question.mockImplementationOnce((question: string, callback: Function) => {
+    mockReadline.question.mockImplementationOnce((question: string, callback: (s1: string) => void
+    ) => {
       callback('1');
     });
     
