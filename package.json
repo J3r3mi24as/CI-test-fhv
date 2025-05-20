@@ -11,6 +11,21 @@
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
   },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!src/**/*.d.ts",
+      "!**/node_modules/**"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "coverageDirectory": "coverage"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/yourusername/ci-cd-demo.git"

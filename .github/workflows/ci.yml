@@ -27,8 +27,15 @@ jobs:
       - name: Run linting
         run: npm run lint || (npm run lint:fix && npm run lint)
 
-      - name: Run tests
-        run: npm test
+      - name: Run tests with coverage
+        run: npm test -- --coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # Optional for public repos
+          directory: ./coverage/
+          fail_ci_if_error: true
 
       - name: Build the application
         run: npm run build
