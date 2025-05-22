@@ -13,19 +13,24 @@ export class DbService {
   constructor(private dbPath: string) {}
 
   async connect() {
-    this.db = await open({
-      filename: this.dbPath,
-      driver: sqlite3.Database,
-    })
+    try{
 
-    // Create items table if it doesn't exist
-    await this.db.exec(`
-      CREATE TABLE IF NOT EXISTS items (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        description TEXT
-      )
-    `)
+      this.db = await open({
+        filename: this.dbPath,
+        driver: sqlite3.Database,
+      })
+  
+      // Create items table if it doesn't exist
+      await this.db.exec(`
+        CREATE TABLE IF NOT EXISTS items (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name TEXT NOT NULL,
+          description TEXT
+        )
+      `)
+    } catch {
+      throw new Error(`ERR_CONNECT`)
+    }
   }
 
   async close() {
@@ -84,5 +89,10 @@ export class DbService {
 
   async deleteItem(id: string): Promise<void> {
     await this.run("DELETE FROM items WHERE id = ?", [id])
+  }
+
+  async getItemById(id: string): Promise<Item | undefined> {
+    const item = await this.get("SELECT * FROM items WHERE id = ?", [id])
+    return item as Item | undefined
   }
 }
