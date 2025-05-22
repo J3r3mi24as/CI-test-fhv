@@ -1,5 +1,6 @@
 import { assert } from "console";
 import { DbService } from "../src/services/dbService";
+import { Item } from "../src/services/dbService";
 
 describe("DbService Tests", () => {
   let dbService: DbService;
@@ -56,6 +57,22 @@ describe("DbService Tests", () => {
     }
     
   });
+
+  it("should handle errors get Item by Name", async () => {
+    const item = await dbService.getItemByName("non_existent_name")
+    expect(item).toBeUndefined()
+  })
+
+  it("should handle errors get Item by Name", async () => {
+    const item2 = await dbService.insertItem({name: "Laptop", description: "macbook pro"})
+    const item = await dbService.getItemByName("Laptop")
+    if(item){
+
+      expect(item).toMatchObject<Item>({id: item2.id, name: "Laptop", description: "macbook pro"})
+    } else {
+      expect(false).toBeTruthy()
+    }
+  })
 
   it("should handle errors when updating non-existent items", async () => {
    try{
