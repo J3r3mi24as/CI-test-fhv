@@ -68,7 +68,7 @@ describe("DbService Tests", () => {
     const item = await dbService.getItemByName("Laptop")
     if(item){
 
-      expect(item).toMatchObject<Item>({id: item2.id, name: "Laptop", description: "macbook pro"})
+      expect(item).toMatchObject<Item>({id: item2.id, name: "laptop", description: "macbook pro"})
     } else {
       expect(false).toBeTruthy()
     }
