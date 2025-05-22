@@ -19,3 +19,5 @@ export default function app() {
     process.exit(0)
   })
 }
+
+app()

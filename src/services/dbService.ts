@@ -95,4 +95,9 @@ export class DbService {
     const item = await this.get("SELECT * FROM items WHERE id = ?", [id])
     return item as Item | undefined
   }
+
+  async getItemByName(name: string): Promise<Item | undefined> {
+    const item = await this.get("SELECT * FROM items WHERE name = ?", [name])
+    return item as Item | undefined
+  }
 }
